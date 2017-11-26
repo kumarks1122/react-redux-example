@@ -1,0 +1,47 @@
+body {
+    margin:0px;
+    padding:0px;
+    color: #000;
+    font-family: Helvetica;
+}
+.header {
+    padding-top:5px;
+    text-align:right;
+}
+.logo {
+    padding:5px 0px 0px 10px;
+    float:left;
+}
+.header ul {
+    padding:0;
+    margin:0;
+    height:35px;
+}
+.header li {
+    list-style:none;
+    display:inline-table;
+    height:35px;
+}
+.header ul li .flight, .header ul li .suitcase, .header ul li .settings{
+    display: inline-table;
+    background: #FFF url('/images/iconSprite.png');
+    height:35px;
+    width:35px;
+    margin-right:5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-top-left-radius: 5px;
+}
+.header ul li .selected {
+    background-color:#FFCC00;
+}
+.header ul li .flight{
+    background-position:50% 10px;
+}
+.header ul li .suitcase{
+    background-position:50% -40px;
+}
+.header ul li .settings{
+    background-position:50% -90px;
+}
