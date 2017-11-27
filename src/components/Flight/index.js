@@ -13,7 +13,7 @@ import {
   RETURN_TRIP_CHANGE
 } from '../../helpers/actionTypes';
 import agent from '../../agent';
-import { readableNumber } from '../../helpers/functions';
+import { readableNumber, timeInBetween } from '../../helpers/functions';
 
 const mapStateToProps = state => ({ ...state.flight });
 
@@ -54,10 +54,40 @@ class Flight extends Component {
     this.setState({ filterVisible: !this.state.filterVisible })
   }
 
-  onFilterSubmit = () => {
-    this.props.onFilter(Promise.all([
-      agent.Flights.filter(this.props.departureAt, this.props.arrivalAt, this.props.airlines)
-    ]));
+  onFilterSubmit = (departsWithin, arrivalsWithin, airlines) => {
+    let { storedTrips } = this.props;
+    const initial_flights = this.filterTrips(storedTrips.initial_flights, departsWithin, arrivalsWithin, airlines);
+    const return_flights = this.filterTrips(storedTrips.return_flights, departsWithin, arrivalsWithin, airlines);
+    if (initial_flights[0]) {
+      this.props.onSelectInitialTrip(initial_flights[0])
+    }
+    if (return_flights[0]) {
+      this.props.onSelectReturnTrip(return_flights[0])
+    }
+    this.props.onFilter({ initial_flights, return_flights });
+  }
+
+  filterTrips = (flightSchedules, departsWithin, arrivalsWithin, airlines) => {
+    const filteredSchedules = flightSchedules.map((schedule) => {
+      let isValid = false;
+
+      if (timeInBetween(schedule.departs, departsWithin)) {
+        if (timeInBetween(schedule.arrives, arrivalsWithin)) {
+          if (airlines.size > 0) {
+            isValid = airlines.has(schedule.carrier_code)
+          } else {
+            isValid = true;
+          }
+        }
+      }
+      if (isValid) {
+        return schedule;
+      } else {
+        return null;
+      }
+    });
+
+    return filteredSchedules.filter(x => x);
   }
 
   renderCart = () => {

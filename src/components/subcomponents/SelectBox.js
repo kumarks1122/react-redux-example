@@ -6,7 +6,7 @@ class SelectBox extends Component {
     return (
       <fieldset className="filter">
         <legend>{this.props.title}</legend>
-        <select onChange={this.props.value} onChange={this.props.onChange}>
+        <select value={this.props.value} onChange={this.props.onChange}>
         	{
             this.props.options.map((option) => {
               return (
@@ -25,11 +25,11 @@ class SelectBox extends Component {
 SelectBox.defaultProps = {
 	options: [],
 	title: "Select",
-
 };
 SelectBox.propTypes = {
   options: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string,
+  value: PropTypes.number,
 };
 
 export default SelectBox;

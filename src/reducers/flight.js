@@ -10,8 +10,11 @@ import {
 const defaultState = {
   selectedAirlines: new Set([]),
   trips: [],
+  storedTrips: [],
   initialTripSelected: {},
-  returnTripSelected: {}  
+  returnTripSelected: {},
+  departureAt: 0,
+  arrivalAt: 0
 }
 
 export default (state = defaultState, action) => {
@@ -20,6 +23,7 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         trips: action.payload[0],
+        storedTrips: action.payload[0],
         airlines: action.payload[1],
         initialTripSelected: action.payload[0].initial_flights ? action.payload[0].initial_flights[0] : {},
         returnTripSelected: action.payload[0].return_flights ? action.payload[0].return_flights[0] : {}
@@ -29,7 +33,7 @@ export default (state = defaultState, action) => {
     case FILTER_TRIP:
       return {
         ...state,
-        trips: action.payload[0],
+        trips: action.payload,
       };
     case UPDATE_FIELD_FILTER:
       return { ...state, [action.key]: action.value };

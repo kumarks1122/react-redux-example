@@ -23,12 +23,12 @@ class Filter extends Component {
     super(props);
 
     const timings = [
-      { value: 0, name: "Anytime" },
-      { value: 1, name: "Early (Before 8am)" },
-      { value: 2, name: "Morning (8am - 12pm)" },
-      { value: 3, name: "Afternoon (12pm - 4pm)" },
-      { value: 4, name: "Evening (4pm - 8pm)" },
-      { value: 5, name: "Night (After 8pm)" },
+      { value: 0, name: "Anytime", time: { from: "00:00:00", to: "23:59:59" } },
+      { value: 1, name: "Early (Before 8am)", time: { from: "00:00:00", to: "07:59:59" } },
+      { value: 2, name: "Morning (8am - 12pm)", time: { from: "08:00:00", to: "11:59:59" } },
+      { value: 3, name: "Afternoon (12pm - 4pm)", time: { from: "12:00:00", to: "15:59:59" } },
+      { value: 4, name: "Evening (4pm - 8pm)", time: { from: "16:00:00", to: "19:59:59" } },
+      { value: 5, name: "Night (After 8pm)", time: { from: "20:00:00", to: "23:59:59" } },
     ]
 
     this.state = {
@@ -48,14 +48,21 @@ class Filter extends Component {
     } else {
       airlines.add(value);
     }
-    debugger;
+
     this.props.onAirlinesChange(airlines);
   }
 
-  render() {
-    const departureAt = this.props.departureAt;
-    const arrivalAt = this.props.arrivalAt;
+  handleFilterSubmit = () => {
+    const { timings } = this.state;
+    const { selectedAirlines } = this.props;
+    debugger;
+    const departsWithin = timings.find((timing) => timing.value === parseInt(this.props.departureAt, 10)).time;
+    const arrivalsWithin = timings.find((timing) => timing.value === parseInt(this.props.arrivalAt, 10)).time;
 
+    this.props.onFilterSubmit(departsWithin, arrivalsWithin, selectedAirlines);
+  }
+
+  render() {
     return (
       <div id="filter">
         <form>
@@ -63,14 +70,14 @@ class Filter extends Component {
             <SelectBox
               options={this.state.timings}
               title={"Departure Time"}
-              value={departureAt}
-              onChange={this.departureAtChange}
+              value={this.props.departureAt}
+              onChange={this.handleDepartureAtChange}
             />
             <SelectBox
               options={this.state.timings}
               title={"Return time"}
-              value={arrivalAt}
-              onChange={this.departureAtChange}
+              value={this.props.arrivalAt}
+              onChange={this.handleArrivalAtChange}
             />
             <fieldset className="filter stations">
               <legend>Preferred Airlines</legend>
@@ -95,7 +102,7 @@ class Filter extends Component {
             </fieldset>
           </div>
           <p className="action">
-            <button type="button" id="applyFilter" onClick={this.props.onFilterSubmit}>Filter flights</button>
+            <button type="button" id="applyFilter" onClick={this.handleFilterSubmit}>Filter flights</button>
           </p>
         </form>
       </div>
