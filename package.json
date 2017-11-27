@@ -2,13 +2,24 @@
   "name": "roundtrip",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "react-scripts": "1.0.17"
+  },
   "dependencies": {
+    "history": "^4.7.2",
+    "moment": "^2.19.2",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
+    "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.0",
-    "react-scripts": "1.0.17"
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-logger": "^3.0.6",
+    "superagent": "^3.8.1",
+    "superagent-promise": "^1.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

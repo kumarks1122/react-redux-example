@@ -301,3 +301,6 @@ fieldset.filter legend{
 .fRight{
   float: right;
 }
+.filterToggleButton{
+  cursor: pointer;
+}

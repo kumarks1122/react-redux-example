@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import SelectBox from '../subcomponents/SelectBox';
+import {
+  UPDATE_FIELD_FILTER
+} from '../../helpers/actionTypes';
+
+const mapStateToProps = state => ({ ...state.flight });
+
+const mapDispatchToProps = dispatch => ({
+  onDepartureAtChange: value =>
+    dispatch({ type: UPDATE_FIELD_FILTER, key: 'departureAt', value }),
+  onArrivalAtChange: value =>
+    dispatch({ type: UPDATE_FIELD_FILTER, key: 'arrivalAt', value }),
+  onAirlinesChange: value =>
+    dispatch({ type: UPDATE_FIELD_FILTER, key: 'selectedAirlines', value }),
+});
 
 class Filter extends Component {
   constructor(props) {
@@ -20,32 +34,68 @@ class Filter extends Component {
     this.state = {
       timings: timings
     }
+
+    this.handleDepartureAtChange = ev => this.props.onDepartureAtChange(ev.target.value);
+    this.handleArrivalAtChange = ev => this.props.onArrivalAtChange(ev.target.value);
+  }
+
+  handleAirlineChange = (ev) => {
+    const value = ev.target.value;
+    const airlines = new Set(this.props.selectedAirlines)
+
+    if (airlines.has(value)) {
+      airlines.delete(value);
+    } else {
+      airlines.add(value);
+    }
+    debugger;
+    this.props.onAirlinesChange(airlines);
   }
 
   render() {
+    const departureAt = this.props.departureAt;
+    const arrivalAt = this.props.arrivalAt;
+
     return (
       <div id="filter">
-        <form method="post" action="results.shtml">
+        <form>
           <div className="settingsArea">
             <SelectBox
               options={this.state.timings}
               title={"Departure Time"}
+              value={departureAt}
+              onChange={this.departureAtChange}
             />
             <SelectBox
               options={this.state.timings}
               title={"Return time"}
+              value={arrivalAt}
+              onChange={this.departureAtChange}
             />
             <fieldset className="filter stations">
               <legend>Preferred Airlines</legend>
-              <label for="AI">
-                <input id="AI" type="checkbox" value="AI" name="airline_codes" />
-                <span className="airlogo fAI"></span> 
-                <span>Air India</span>
-              </label>
+              {
+                this.props.airlines.map((airline) => {
+                  return (
+                    <label for={airline.carrier_code}>
+                      <input
+                        id={airline.carrier_code}
+                        type="checkbox"
+                        value={airline.carrier_code}
+                        name="airline_codes"
+                        onChange={this.handleAirlineChange}
+                        checked={this.props.selectedAirlines.has(airline.carrier_code)}
+                      />
+                      <div className={`flight-icons ${airline.short_carrier_name}`}></div>
+                      <span>{airline.carrier_name}</span>
+                    </label>
+                  )
+                })
+              }
             </fieldset>
           </div>
           <p className="action">
-            <button type="button" id="applyFilter" >Filter flights</button>
+            <button type="button" id="applyFilter" onClick={this.props.onFilterSubmit}>Filter flights</button>
           </p>
         </form>
       </div>
@@ -53,4 +103,12 @@ class Filter extends Component {
   }
 }
 
-export default Filter;
+Filter.defaultProps = {
+  airlines: [],
+};
+
+Filter.propTypes = {
+  airlines: PropTypes.arrayOf(PropTypes.object),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Filter);

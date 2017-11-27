@@ -2,15 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class SelectBox extends Component {
-	constructor(props) {
-		super(props);
-	}
-
-  render() {
+	render() {
     return (
       <fieldset className="filter">
         <legend>{this.props.title}</legend>
-        <select>
+        <select onChange={this.props.value} onChange={this.props.onChange}>
         	{
             this.props.options.map((option) => {
               return (

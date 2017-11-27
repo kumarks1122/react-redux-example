@@ -1,0 +1,28 @@
+{
+	"flights": {
+		"initial_flights": [
+			{ "id": 2, "departure_city": "BOM", "arrival_city": "DEL", "fare": 3953, "departs": 1314924180000, "arrives": 1314924280000, "cb": 2, "carrier_name": "air", "carrier_code": "AI", "flight_no": "E6-184" },
+			{ "id": 1, "departure_city": "BOM", "arrival_city": "DEL", "fare": 2819, "departs": 1314924280000, "arrives": 1314924380000, "cb": 1, "carrier_name": "kf", "carrier_code": "SJ", "flight_no": "KF-123" },
+			{ "id": 0, "departure_city": "BOM", "arrival_city": "DEL", "fare": 1753, "departs": 1314924380000, "arrives": 1314924480000, "cb": 0, "carrier_name": "indigo", "carrier_code": "IG", "flight_no": "IG-123" },
+			{ "id": 3, "departure_city": "BOM", "arrival_city": "DEL", "fare": 9907, "departs": 1314924480000, "arrives": 1314924580000, "cb": 3, "carrier_name": "indigo", "carrier_code": "IG", "flight_no": "IG-123" }
+		],
+		"return_flights": [
+			{ "id": 2, "departure_city": "DEL", "arrival_city": "BOM", "fare": 4953, "departs": 1314924180000, "arrives": 1314924280000, "cb": 2, "carrier_name": "kf", "carrier_code": "AI", "flight_no": "KF-184" },
+			{ "id": 1, "departure_city": "DEL", "arrival_city": "BOM", "fare": 4819, "departs": 1314924280000, "arrives": 1314924380000, "cb": 1, "carrier_name": "go", "carrier_code": "GO", "flight_no": "GO-123" },
+			{ "id": 0, "departure_city": "DEL", "arrival_city": "BOM", "fare": 4753, "departs": 1314924380000, "arrives": 1314924480000, "cb": 0, "carrier_name": "air", "carrier_code": "IG", "flight_no": "AI-123" },
+			{ "id": 3, "departure_city": "DEL", "arrival_city": "BOM", "fare": 4907, "departs": 1314924480000, "arrives": 1314924580000, "cb": 3, "carrier_name": "indigo", "carrier_code": "IG", "flight_no": "AI-123" }
+		]
+	},
+	"airlines": [
+		{"carrier_name": "Air India", "short_carrier_name": "air", "carrier_code": "AI"},
+		{"carrier_name": "Air India IC", "short_carrier_name": "kf", "carrier_code": "IC"},
+		{"carrier_name": "GoAir", "short_carrier_name": "indigo", "carrier_code": "G8"},
+		{"carrier_name": "IndiGo", "short_carrier_name": "indigo", "carrier_code": "6E"},
+		{"carrier_name": "Jet Airways", "short_carrier_name": "kf", "carrier_code": "9W"},
+		{"carrier_name": "Jet Airways Konnect", "short_carrier_name": "go", "carrier_code": "9W-K"},
+		{"carrier_name": "JetLite", "short_carrier_name": "air", "carrier_code": "S2"},
+		{"carrier_name": "Kingfisher", "short_carrier_name": "indigo", "carrier_code": "IT"},
+		{"carrier_name": "Kingfisher Red", "short_carrier_name": "kf", "carrier_code": "IT-RED"},
+		{"carrier_name": "SpiceJet", "short_carrier_name": "kf", "carrier_code": "SG"}
+	]
+}
