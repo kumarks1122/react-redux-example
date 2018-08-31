@@ -102,7 +102,7 @@ class Filter extends Component {
             </fieldset>
           </div>
           <p className="action">
-            <button type="button" id="applyFilter" onClick={this.handleFilterSubmit}>Filter flights Data</button>
+            <button type="button" id="applyFilter" onClick={this.handleFilterSubmit}>Filter flight</button>
           </p>
         </form>
       </div>
