@@ -1,4 +1,4 @@
-	## Steps to run the app:
+## Steps to run the app:
 
 ### Step 1:
 Clone the app
