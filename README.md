@@ -1,9 +1,9 @@
-## Steps to run the app:
+	## Steps to run the app:
 
 ### Step 1:
 Clone the app
 
-`git clone git@github.com:kumarks1122/roundtrip.git`
+`git clone git@github.com:kumarks1122/react-redux-example.git`
 
 
 ### Step 2:
